@@ -3,11 +3,12 @@ from langchain_community.document_loaders import UnstructuredFileLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
-
+from langchain.embeddings import QianfanEmbeddingsEndpoint
 
 def main():
+    EMBEDDING_MODEL=QianfanEmbeddingsEndpoint()
     # 定义向量模型路径
-    EMBEDDING_MODEL = r'F:\moka-ai\m3e-base'
+    # EMBEDDING_MODEL = r'F:\moka-ai\m3e-base'
     # 加载文档
     loader = UnstructuredFileLoader('衣服属性.txt')
     data = loader.load()
