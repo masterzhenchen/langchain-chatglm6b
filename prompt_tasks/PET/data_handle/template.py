@@ -50,21 +50,30 @@ class HardTemplate():
                     str_formated += inputs_dict[value]
             else:
                 str_formated += value
-        print('str_formated-->', str_formated)
+        # print('str_formated-->', str_formated)
         encoded = tokenizer(text=str_formated, truncation=True, max_length=max_seq_len, padding='max_length')
         outputs['input_ids'] = encoded['input_ids']
         outputs['token_type_ids'] = encoded['token_type_ids']
         outputs['attention_mask'] = encoded['attention_mask']
         token_list = tokenizer.convert_ids_to_tokens(encoded['input_ids'])
-        outputs['text'] = ''.join(token_list)
+        # print('token_list-->', token_list)
+        # outputs['text'] = ''.join(token_list)
         mask_token_id = tokenizer.convert_tokens_to_ids(['[MASK]'])[0]
+        # print('mask_token_id-->', mask_token_id)
         condition = np.array(outputs['input_ids']) == mask_token_id
+        # print('condition-->', condition)
         mask_position = np.where(condition)[0].tolist()
+        # print('mask_position-->', mask_position)
         outputs['mask_position'] = mask_position
+        # print('outputs-->', outputs)
         return outputs
 
 
 if __name__ == '__main__':
+    ht=HardTemplate('"这是一条{MASK}评论：{textA}。"')
+
+    # print(ht.inputs_list)
+    # print(ht.custom_tokens)
     pc = ProjectConfig()
     tokenizer = AutoTokenizer.from_pretrained(pc.pre_model)
     hard_template = HardTemplate(prompt='这是一条{MASK}评论：{textA}')
@@ -76,6 +85,6 @@ if __name__ == '__main__':
         max_seq_len=30,
         max_length=2)
     # print('\ntep-->',hard_template.custom_tokens)
-    print(tep)
-    print(tokenizer.convert_ids_to_tokens([3819, 3352]))
-    print(tokenizer.convert_tokens_to_ids(['水', '果']))
+    # print(tep)
+    # print(tokenizer.convert_ids_to_tokens([3819, 3352]))
+    # print(tokenizer.convert_tokens_to_ids(['水', '果']))

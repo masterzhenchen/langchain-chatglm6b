@@ -134,4 +134,7 @@ from transformers import AutoTokenizer
 if __name__ == '__main__':
     tokenizer = AutoTokenizer.from_pretrained(pc.pre_model)
     ver = Verbalizer(pc.verbalizer, tokenizer, pc.max_label_len)
-    print(ver.load_label_dict(pc.verbalizer))
+    # print(ver.load_label_dict(pc.verbalizer))
+    # print(ver.find_sub_labels('电脑'))
+    print(tokenizer.pad_token_id)
+

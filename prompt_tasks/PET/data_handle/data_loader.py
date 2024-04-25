@@ -23,6 +23,7 @@ def get_data():
     dataset = dataset.map(new_func, batched=True)
     train_dataset = dataset['train']
     dev_dataset = dataset['dev']
+    print('dev_dataset-->', dev_dataset)
     train_dataloader = DataLoader(
         train_dataset, shuffle=True, collate_fn=default_data_collator,
         batch_size=pc.batch_size

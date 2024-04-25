@@ -22,8 +22,9 @@ def convert_example(
         'mask_positions': [],
         'mask_labels': []
     }
-    print("examples['text']-->",examples['text'])
+    # print("examples['text']-->", examples['text'])
     for i, example in enumerate(examples['text']):
+        
         if train_model:
             label, content = example.strip().split('\t')
         else:
@@ -57,8 +58,10 @@ def convert_example(
 if __name__ == '__main__':
     pc = ProjectConfig()
     train_dataset = load_dataset('text', data_files=pc.train_path)
-    print('*'*80)
-    print(train_dataset)
+    print('*' * 80)
+    # for i,example in enumerate(train_dataset['train']):
+    #     print('i-->',i)
+    #     print('Example:', example)
     # print(type(train_dataset))
     # print(train_dataset)
     # print('*'*80)
@@ -71,8 +74,11 @@ if __name__ == '__main__':
                            hard_template=hard_template,
                            max_seq_len=30,
                            max_label_len=2)
+    print('train_dataset-->',train_dataset)
     dataset = train_dataset.map(convert_func, batched=True)
+    print('dataset-->', dataset)
     for value in dataset['train']:
         print(value)
         print(len(value['input_ids']))
         break
+
