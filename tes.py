@@ -1,3 +1,3 @@
-from transformers import AutoTokenizer
-tokenizer=AutoTokenizer.from_pretrained(r'F:\bert-base-chinese')
-print(tokenizer('你好'))
+import numpy as np
+a=[1,2,3,4,5,6,7,8]
+print()
